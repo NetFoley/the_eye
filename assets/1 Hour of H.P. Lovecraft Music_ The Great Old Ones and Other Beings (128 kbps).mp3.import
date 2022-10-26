@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/1 Hour of H.P. Lovecraft Music_ The Great Old Ones and Other Beings (128 kbps).mp3-23b3e7339a5be64621a585d8efa46405.mp3str"
+
+[deps]
+
+source_file="res://assets/1 Hour of H.P. Lovecraft Music_ The Great Old Ones and Other Beings (128 kbps).mp3"
+dest_files=[ "res://.import/1 Hour of H.P. Lovecraft Music_ The Great Old Ones and Other Beings (128 kbps).mp3-23b3e7339a5be64621a585d8efa46405.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

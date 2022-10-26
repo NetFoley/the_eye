@@ -1,0 +1,183 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://assets/eye_bg.png" type="Texture" id=1]
+[ext_resource path="res://scenes/Camera2D.gd" type="Script" id=2]
+[ext_resource path="res://scenes/map/Map.gd" type="Script" id=3]
+[ext_resource path="res://assets/wc.png" type="Texture" id=4]
+[ext_resource path="res://assets/eye_fg.png" type="Texture" id=5]
+[ext_resource path="res://scenes/tree/branch.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/1 Hour of H.P. Lovecraft Music_ The Great Old Ones and Other Beings (128 kbps).mp3" type="AudioStream" id=7]
+[ext_resource path="res://scenes/map/AudioStreamPlayer2D.gd" type="Script" id=8]
+[ext_resource path="res://scenes/map/ColorRect.gd" type="Script" id=9]
+
+[sub_resource type="OpenSimplexNoise" id=1]
+
+[sub_resource type="NoiseTexture" id=2]
+noise = SubResource( 1 )
+
+[sub_resource type="Shader" id=7]
+code = "shader_type canvas_item;
+
+uniform sampler2D noise ;
+
+void fragment(){
+	COLOR.rgb -= texture(noise, vec2(UV.x*10.0+TIME*0.003, UV.y*10.0)).rgb*0.15;
+}"
+
+[sub_resource type="OpenSimplexNoise" id=9]
+octaves = 2
+period = 7.5
+persistence = 0.473
+lacunarity = 2.99
+
+[sub_resource type="NoiseTexture" id=10]
+width = 500
+height = 500
+noise = SubResource( 9 )
+
+[sub_resource type="ShaderMaterial" id=8]
+shader = SubResource( 7 )
+shader_param/noise = SubResource( 10 )
+
+[sub_resource type="Shader" id=5]
+code = "shader_type canvas_item;
+
+void fragment(){
+	COLOR*= sqrt(UV.y);
+}"
+
+[sub_resource type="ShaderMaterial" id=6]
+shader = SubResource( 5 )
+
+[sub_resource type="OpenSimplexNoise" id=3]
+octaves = 5
+period = 1.8
+persistence = 0.41
+lacunarity = 0.51
+
+[sub_resource type="NoiseTexture" id=4]
+width = 20
+height = 20
+noise = SubResource( 3 )
+
+[node name="Map" type="Node2D"]
+script = ExtResource( 3 )
+noise_map = SubResource( 2 )
+
+[node name="Light2D" type="Light2D" parent="."]
+position = Vector2( 5907, -2151 )
+texture = ExtResource( 4 )
+texture_scale = 25.0
+energy = 0.5
+range_height = 100.0
+shadow_enabled = true
+shadow_buffer_size = 5000
+shadow_gradient_length = 100.0
+shadow_filter = 1
+shadow_filter_smooth = 1.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 5828, -506 )
+current = true
+zoom = Vector2( 6, 6 )
+script = ExtResource( 2 )
+
+[node name="ColorRect" type="ColorRect" parent="Camera2D"]
+material = SubResource( 8 )
+margin_left = -491763.0
+margin_top = -370472.0
+margin_right = 508237.0
+margin_bottom = 629528.0
+color = Color( 0.4, 0, 0, 1 )
+script = ExtResource( 9 )
+
+[node name="Sprite2" type="Sprite" parent="."]
+modulate = Color( 0.572549, 0, 0, 1 )
+position = Vector2( 5867, -1533 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="Sprite2"]
+show_behind_parent = true
+texture = ExtResource( 5 )
+
+[node name="Branch" parent="Sprite2" instance=ExtResource( 6 )]
+show_behind_parent = true
+position = Vector2( -288, -173 )
+scale = Vector2( 0.5, 0.5 )
+nb_points = 50
+b_lengh = 3
+animated = false
+start_angle = 3.0
+stop_light = false
+
+[node name="Branch2" parent="Sprite2" instance=ExtResource( 6 )]
+show_behind_parent = true
+position = Vector2( 324, 142 )
+scale = Vector2( 0.5, 0.5 )
+nb_points = 50
+b_lengh = 3
+animated = false
+start_angle = -1.0
+stop_light = false
+
+[node name="Branch3" parent="Sprite2" instance=ExtResource( 6 )]
+show_behind_parent = true
+position = Vector2( 215.5, 217.5 )
+scale = Vector2( 0.5, 0.5 )
+nb_points = 50
+b_lengh = 3
+animated = false
+stop_light = false
+
+[node name="Branch4" parent="Sprite2" instance=ExtResource( 6 )]
+show_behind_parent = true
+position = Vector2( 55.5, 265 )
+scale = Vector2( 0.5, 0.5 )
+nb_points = 50
+b_lengh = 4
+animated = false
+stop_light = false
+
+[node name="Branch5" parent="Sprite2" instance=ExtResource( 6 )]
+show_behind_parent = true
+position = Vector2( 289.5, -161.5 )
+scale = Vector2( 0.5, 0.5 )
+nb_points = 50
+b_lengh = 4
+animated = false
+start_angle = -3.0
+stop_light = false
+
+[node name="Branch6" parent="Sprite2" instance=ExtResource( 6 )]
+show_behind_parent = true
+position = Vector2( -310.5, 172.5 )
+scale = Vector2( 0.5, 0.5 )
+nb_points = 50
+b_lengh = 3
+animated = false
+start_angle = 1.0
+stop_light = false
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource( 6 )
+margin_left = -1096.0
+margin_top = -211.0
+margin_right = 13904.0
+margin_bottom = 4789.0
+color = Color( 0.27451, 0, 0.239216, 1 )
+
+[node name="YSort" type="YSort" parent="."]
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( -45, 60 )
+texture = SubResource( 4 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+position = Vector2( 5940, -748 )
+stream = ExtResource( 7 )
+script = ExtResource( 8 )
