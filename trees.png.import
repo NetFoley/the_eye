@@ -2,16 +2,11 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/trees.png-db63732854c3e495601944e6ff5233ba.stex"
-metadata={
-"vram_texture": false
-}
+valid=false
 
 [deps]
 
 source_file="res://exporthtml/trees.png"
-dest_files=[ "res://.import/trees.png-db63732854c3e495601944e6ff5233ba.stex" ]
-
 [params]
 
 compress/mode=0
